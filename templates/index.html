@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multilanguage Translator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+</head>
+<body>
+
+<div class="container">
+    <h1>Multilanguage Translator</h1>
+
+    <form method="post" id="translationForm">
+        <label for="article_text">Enter English Text:</label>
+        <textarea id="article_text" name="article_text" rows="4" cols="50" required></textarea><br>
+
+        <label for="target_lang">Select Target Language:</label>
+        <select id="target_lang" name="target_lang">
+            {% for code, name in language_mapping.items() %}
+                <option value="{{ code }}">{{ name }}</option>
+            {% endfor %}
+        </select><br>
+
+        <input type="submit" value="Translate">
+    </form>
+
+    {% if article_text %}
+    <h2>English Text:</h2>
+    <p>{{ article_text }}</p>
+    <h2>Translated Text ({{ language_mapping[target_lang] }}):</h2>
+    <p id="translated_text">{{ translated_text }}</p>
+    {% endif %}
+</div>
+
+<script src="{{ url_for('static', filename='scripts.js') }}"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="{{ url_for('static', filename='ajax.js') }}"></script>
+
+</body>
+</html>

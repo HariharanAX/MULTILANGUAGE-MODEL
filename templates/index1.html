@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Translator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles1.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Language Translator</h1>
+
+    <form id="translationForm">
+        <label for="text_to_translate">Enter Text to Translate:</label>
+        <textarea id="text_to_translate" name="text_to_translate" rows="4" cols="50" required></textarea><br>
+
+        <label for="source_language">Source Language:</label>
+        <select id="source_language" name="source_language">
+            {% for language in languages %}
+                <option value="{{ language.code }}">{{ language.name }}</option>
+            {% endfor %}
+        </select><br>
+
+        <label for="target_language">Target Language:</label>
+        <select id="target_language" name="target_language">
+            {% for language in languages %}
+                <option value="{{ language.code }}">{{ language.name }}</option>
+            {% endfor %}
+        </select><br>
+
+        <input type="submit" value="Translate">
+    </form>
+
+    <div id="result">
+        <h2>Original Text:</h2>
+        <p id="original_text"></p>
+        <h2>Translated Text:</h2>
+        <p id="translated_text"></p>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='scripts1.js') }}"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</body>
+</html>
